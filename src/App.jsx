@@ -14,7 +14,7 @@ import {
     IndividualComparePage,
     EntityComparePage,
     VerifyIndividualPage,
-    VerifyEntityPage,
+    VerifyEntityPage,IndividualHistoryPage,EntityHistoryPage
 } from "./pages/CustomerPages";
 import ConfigPage from "./pages/ConfigPage";
 const NotFound = () => (
@@ -64,6 +64,14 @@ export default function App() {
                 <Route
                     path="/screening/entity"
                     element={<EntityComparePage />}
+                />
+                <Route
+                    path="/history/individual"
+                    element={<IndividualHistoryPage />}
+                />
+                <Route
+                    path="/history/entity"
+                    element={<EntityHistoryPage />}
                 />
                 <Route path="/configuration" element={<ConfigPage />} />
                 <Route path="*" element={<NotFound />} />

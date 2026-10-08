@@ -56,4 +56,14 @@ export const crmApi = {
             .get(`/verify/aml/${encodeURIComponent(id)}/saved/entity-customer`)
             .then(u),
     compareEntity: (b) => http.post("/compare/entity/sanction-data", b).then(u),
+
+       getHistoryOfIndividual : (id) =>
+        http
+            .get(`/view/individual/${encodeURIComponent(id)}/history`)
+            .then(u),
+
+        getHistoryOfEntity: (id) =>
+        http
+            .get(`/view/entity/${encodeURIComponent(id)}/history`)
+            .then(u),
 };

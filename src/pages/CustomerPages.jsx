@@ -234,6 +234,7 @@ export const EntityComparePage = () => (
         successLabel="Run entity screening"
     />
 );
+
 function VerifyPage({ entity = false }) {
     const [id, setId] = useState(""),
         [error, setError] = useState("");
@@ -291,3 +292,61 @@ function VerifyPage({ entity = false }) {
 }
 export const VerifyIndividualPage = () => <VerifyPage />;
 export const VerifyEntityPage = () => <VerifyPage entity />;
+
+function HistoryPage({ entity = false }) {
+    const [id, setId] = useState(""),
+        [error, setError] = useState("");
+    const q = useQuery({
+        queryKey: ["verify", entity, id],
+        queryFn: () =>
+            entity ? crmApi.getHistoryOfEntity(id) : crmApi.getHistoryOfIndividual(id),
+        enabled: false,
+    });
+    const run = () => {
+        if (!id.trim()) {
+            setError("Customer ID is required");
+            return;
+        }
+        setError("");
+        q.refetch();
+    };
+    return (
+        <>
+            <PageHeader
+                code={entity ? "CRM014" : "CRM013"}
+                title={entity ? "AML History of Entity" : "AML History of individual"}
+                description=" backend AML History workflow."
+            />
+            <Toast
+                message={error || (q.error && getApiError(q.error))}
+                onClose={() => setError("")}
+            />
+            <div className="panel">
+                <div className="field">
+                    <label>
+                        {entity ? "Entity" : "Individual"} customer ID
+                    </label>
+                    <input
+                        value={id}
+                        onChange={(e) => setId(e.target.value)}
+                        placeholder="Enter persisted customer ID"
+                    />
+                </div>
+                <button
+                    className="btn primary"
+                    disabled={q.isFetching}
+                    onClick={run}
+                >
+                    {q.isFetching ? (
+                        <Spinner label="Verifying..." />
+                    ) : (
+                        "Verify AML"
+                    )}
+                </button>
+            </div>
+            <ResultPanel data={q.data} title="Verification result" />
+        </>
+    );
+}
+export const IndividualHistoryPage = () => <HistoryPage />;
+export const EntityHistoryPage = () => <HistoryPage entity />;

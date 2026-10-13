@@ -27,7 +27,7 @@ function SingleUpload({
     return (
         <>
             <PageHeader code={code} title={title} description={description} />
-            <Toast message={error} onClose={() => setError("")} />
+          <Toast message={error} type="error"/>
             <div className="panel">
                 <FilePicker
                     label={fieldLabel}
@@ -99,7 +99,7 @@ export function ImportSanctionsPage() {
                 title="Import sanction data"
                 description="Upload both sources and persist the parsed sanction datasets."
             />
-            <Toast message={error} onClose={() => setError("")} />
+          <Toast message={error} type="error"/>
             <div className="panel">
                 <div className="form-grid two">
                     <FilePicker

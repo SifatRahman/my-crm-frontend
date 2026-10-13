@@ -171,7 +171,7 @@ function JsonMutationPage({
     return (
         <>
             <PageHeader code={code} title={title} description={description} />
-            <Toast message={error} onClose={() => setError("")} />
+          <Toast message={error} type="error"/>
             <div className="panel">
                 <JsonEditor
                     value={body}

@@ -1,25 +1,45 @@
-import React from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import "../styles/Toast.css"
 
-export default function Toast({ message, onClose }) {
+export default function Toast({ message, type = "success" }) {
+    const [visible, setVisible] = useState(false);
+
     useEffect(() => {
-        if (!message) return;
+        if (!message) {
+            setVisible(false);
+            return;
+        }
+
+        setVisible(true);
 
         const timer = setTimeout(() => {
-            onClose();
-        }, 4000);
+            setVisible(false);
+        }, 3000);
 
         return () => clearTimeout(timer);
-    }, [message, onClose]);
+    }, [message]);
 
-    if (!message) return null;
+    if (!message || !visible) return null;
 
     return (
-        <div className="toast" role="alert">
+        <div
+            className={`toast toast-${type}`}
+            role={type === "error" ? "alert" : "status"}
+            aria-live={type === "error" ? "assertive" : "polite"}
+        >
             <span>{message}</span>
-            <button onClick={onClose} aria-label="Close notification">
-                ×
-            </button>
         </div>
     );
 }
+
+
+/*
+
+<Toast message="Data saved successfully!" type="success" />
+
+<Toast message="Failed to save data!" type="error" />
+
+<Toast message="Please check your input." type="warning" />
+
+<Toast message="Processing your request..." type="info" />
+*/

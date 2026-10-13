@@ -43,7 +43,7 @@ export default function ConfigPage() {
                 title="AML sanction configuration"
                 description="Update the scoring and threshold configuration used by the screening service."
             />
-            <Toast message={error} onClose={() => setError("")} />
+            <Toast message={error} type="error"/>
             <div className="panel">
                 <JsonEditor
                     value={body}

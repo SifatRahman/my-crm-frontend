@@ -30,16 +30,8 @@ export default function App() {
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/jaro" element={<JaroPage />} />
                 <Route
-                    path="/sanctions/upload"
-                    element={<UnXmlPreviewPage />}
-                />
-                <Route
                     path="/sanctions/import"
                     element={<ImportSanctionsPage />}
-                />
-                <Route
-                    path="/sanctions/bd-preview"
-                    element={<BdPdfPreviewPage />}
                 />
                 <Route
                     path="/customers/individual/create"

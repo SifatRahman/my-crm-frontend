@@ -4,7 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import PageHeader from "../components/PageHeader";
 import FilePicker from "../components/FilePicker";
 import ResultPanel from "../components/ResultPanel";
-import BDSanctionDataPreview from "../components/BDSanctionDataPreview.jsx";
+import SanctionComparisonDataTable from "../components/SanctionIndividualComparisonTable.jsx";
 import Spinner from "../components/Spinner";
 import Toast from "../components/Toast";
 import { crmApi } from "../api/crmApi";
@@ -49,11 +49,8 @@ function SingleUpload({
       </div>
 
       {m.isSuccess &&
-        (code === "CRM009" ? (
-          <BDSanctionDataPreview data={m.data} title="Parsed response" />
-        ) : (
           <ResultPanel data={m.data} title="Parsed response" />
-        ))}
+      }
     </>
   );
 }

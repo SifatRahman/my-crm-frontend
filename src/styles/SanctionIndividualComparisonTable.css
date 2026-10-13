@@ -1,0 +1,230 @@
+
+.sanction-table-container {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 20px 0;
+    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+    color: #1e293b;
+}
+
+.sanction-table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.sanction-table-header h2 {
+    font-size: 22px;
+    margin: 0 0 6px;
+    font-weight: 700;
+}
+
+.sanction-table-header p {
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.sanction-count {
+    background: #eff6ff;
+    color: #1d4ed8;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.sanction-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.sanction-table {
+    width: 100%;
+    min-width: 1050px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.sanction-table th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 14px 16px;
+    border-bottom: 1px solid #e2e8f0;
+    white-space: nowrap;
+}
+
+.sanction-table td {
+    padding: 16px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.sanction-table tbody tr:hover {
+    background: #f8fafc;
+}
+
+.person-name {
+    display: block;
+    min-width: 180px;
+    color: #0f172a;
+    line-height: 1.5;
+}
+
+.person-id {
+    display: block;
+    max-width: 190px;
+    color: #64748b;
+    font-size: 12px;
+    overflow-wrap: anywhere;
+}
+
+.overall-score {
+    min-width: 100px;
+}
+
+.overall-score > strong {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.score-track {
+    width: 100px;
+    height: 6px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #e2e8f0;
+}
+
+.score-fill {
+    height: 100%;
+    border-radius: inherit;
+    transition: width 0.3s ease;
+}
+
+.high-match {
+    color: #b91c1c;
+}
+
+.score-fill.high-match {
+    background: #dc2626;
+}
+
+.potential-match {
+    color: #b45309;
+}
+
+.score-fill.potential-match {
+    background: #f59e0b;
+}
+
+.clear-match {
+    color: #15803d;
+}
+
+.score-fill.clear-match {
+    background: #22c55e;
+}
+
+.unknown-match {
+    color: #475569;
+}
+
+.score-fill.unknown-match {
+    background: #94a3b8;
+}
+
+.status-badge {
+    display: inline-block;
+    border-radius: 20px;
+    padding: 7px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.status-badge.high-match {
+    background: #fee2e2;
+}
+
+.status-badge.potential-match {
+    background: #fef3c7;
+}
+
+.status-badge.clear-match {
+    background: #dcfce7;
+}
+
+.status-badge.unknown-match {
+    background: #f1f5f9;
+}
+
+.score-details summary {
+    cursor: pointer;
+    color: #2563eb;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.score-details[open] {
+    min-width: 240px;
+}
+
+.score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.score-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px;
+    background: #f8fafc;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.score-item span {
+    color: #64748b;
+}
+
+.score-item strong {
+    color: #0f172a;
+}
+
+.sanction-empty {
+    text-align: center;
+    padding: 40px 20px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 12px;
+    color: #64748b;
+}
+
+@media (max-width: 768px) {
+    .sanction-table-container {
+        padding: 16px;
+    }
+
+    .sanction-table-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .sanction-table-header h2 {
+        font-size: 19px;
+    }
+}

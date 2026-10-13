@@ -8,6 +8,11 @@ import Spinner from "../components/Spinner";
 import Toast from "../components/Toast";
 import { crmApi } from "../api/crmApi";
 import { getApiError } from "../api/http";
+import SanctionIndividualComparisonTable from "../components/SanctionIndividualComparisonTable";
+import SanctionEntityComparisonTable from "../components/SanctionEntityComparisonTable";
+import SanctionIndividualHistoryTable from "../components/SanctionIndividualHistoryTable";
+
+
 const individualExample = {
   full_name: "Sifatur Rahman Sifat",
   full_name_2: "Sifat",
@@ -146,6 +151,8 @@ const compareEntityExample = {
     email_address: "",
   },
 };
+
+//Creation customer
 function JsonMutationPage({
   code,
   title,
@@ -178,7 +185,8 @@ function JsonMutationPage({
           {m.isPending ? <Spinner label="Submitting..." /> : successLabel}
         </button>
       </div>
-      <ResultPanel data={m.data} title="Backend response" />
+      <Toast message={m?.data?.message} type="success" />
+      <ResultPanel data={m.data}/>
     </>
   );
 }
@@ -202,8 +210,59 @@ export const CreateEntityPage = () => (
     successLabel="Create entity"
   />
 );
+
+
+
+
+
+
+
+
+
+
+
+
+//Comparison
+function CustomerComparisonPage({
+  code,
+  title,
+  description,
+  initialValue,
+  action,
+  successLabel,
+}) {
+  const [body, setBody] = useState(initialValue),
+    [error, setError] = useState("");
+  const m = useMutation({
+    mutationFn: () => action(body),
+    onError: (e) => setError(getApiError(e)),
+  });
+  return (
+    <>
+      <PageHeader code={code} title={title} description={description} />
+      <Toast message={error} type="error" />
+      <div className="panel">
+        <JsonEditor
+          value={body}
+          onChange={setBody}
+          hint="Starter fields only: replace them with the exact fields from your backend DTO."
+        />
+        <button
+          className="btn primary"
+          disabled={m.isPending}
+          onClick={() => m.mutate()}
+        >
+          {m.isPending ? <Spinner label="Submitting..." /> : successLabel}
+        </button>
+      </div>
+      <Toast message={m?.data?.message} type="success" />
+      {code==="CRM006" ? <SanctionIndividualComparisonTable data={m.data}/> : <SanctionEntityComparisonTable data={m.data}/>}
+    </>
+  );
+}
+
 export const IndividualComparePage = () => (
-  <JsonMutationPage
+  <CustomerComparisonPage
     code="CRM006"
     title="Individual sanction screening"
     description="Pass customer data and retrieve the backend match scores."
@@ -213,7 +272,7 @@ export const IndividualComparePage = () => (
   />
 );
 export const EntityComparePage = () => (
-  <JsonMutationPage
+  <CustomerComparisonPage
     code="CRM012"
     title="Entity sanction screening"
     description="Pass entity data and retrieve the backend match scores."
@@ -314,10 +373,11 @@ function HistoryPage({ entity = false }) {
           />
         </div>
         <button className="btn primary" disabled={q.isFetching} onClick={run}>
-          {q.isFetching ? <Spinner label="Verifying..." /> : "Verify AML"}
+          {q.isFetching ? <Spinner label="Fetching history..." /> : "Get History"}
         </button>
       </div>
-      <ResultPanel data={q.data} title="Verification result" />
+      
+      {entity ? <SanctionIndividualHistoryTable data={q.data}/> : <SanctionIndividualHistoryTable data={q.data}/>}
     </>
   );
 }

@@ -22,9 +22,7 @@ const groups = [
         "Sanctions",
         [
             ["/jaro", "Jaro-Winkler Test", Activity],
-            ["/sanctions/upload", "UN XML Preview", FileUp],
             ["/sanctions/import", "Import Sanctions", FileCheck2],
-            ["/sanctions/bd-preview", "BD PDF Preview", FileUp],
             ["/configuration", "AML Configuration", Settings],
         ],
     ],

@@ -224,22 +224,27 @@ export const EntityComparePage = () => (
 );
 
 function VerifyPage({ entity = false }) {
-  const [id, setId] = useState(""),
-    [error, setError] = useState("");
-  const q = useQuery({
-    queryKey: ["verify", entity, id],
-    queryFn: () =>
-      entity ? crmApi.verifyEntity(id) : crmApi.verifyIndividual(id),
-    enabled: false,
-  });
-  const run = () => {
+const [id, setId] = useState("");
+const [error, setError] = useState("");
+
+const q = useMutation({
+    mutationFn: (id) =>
+        entity
+            ? crmApi.verifyEntity(id)
+            : crmApi.verifyIndividual(id),
+});
+
+const run = () => {
     if (!id.trim()) {
-      setError("Customer ID is required");
-      return;
+        setError("Customer ID is required");
+        return;
     }
+
     setError("");
-    q.refetch();
-  };
+    q.mutate(id.trim());
+};
+
+
   return (
     <>
       <PageHeader
@@ -274,13 +279,11 @@ export const VerifyEntityPage = () => <VerifyPage entity />;
 function HistoryPage({ entity = false }) {
   const [id, setId] = useState(""),
     [error, setError] = useState("");
-  const q = useQuery({
-    queryKey: ["verify", entity, id],
-    queryFn: () =>
+  const q = useMutation({
+    mutationFn: (id) =>
       entity
         ? crmApi.getHistoryOfEntity(id)
-        : crmApi.getHistoryOfIndividual(id),
-    enabled: false,
+        : crmApi.getHistoryOfIndividual(id)
   });
   const run = () => {
     if (!id.trim()) {
@@ -288,7 +291,7 @@ function HistoryPage({ entity = false }) {
       return;
     }
     setError("");
-    q.refetch();
+    q.mutate(id);
   };
   return (
     <>

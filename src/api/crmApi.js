@@ -5,15 +5,6 @@ export const crmApi = {
         http
             .get(`/test/${encodeURIComponent(a)}/${encodeURIComponent(b)}`)
             .then(u),
-    uploadUnXml: (f) => {
-        const x = new FormData();
-        x.append("file", f);
-        return http
-            .post("/upload/sanction/xml-file", x, {
-                headers: { "Content-Type": "multipart/form-data" },
-            })
-            .then(u);
-    },
     saveSanctionData: (xml, pdf) => {
         const x = new FormData();
         x.append("UNSanctionXML", xml);
@@ -39,16 +30,16 @@ export const crmApi = {
             .then(u),
     saveConfig: (b) =>
         http.post("/save/configuration/sanction-data", b).then(u),
-    uploadBdPdf: (f) => {
-        const x = new FormData();
-        x.append("file", f);
-        return http
-            .post("/upload/bd-sanction/pdf-file", x, {
-                headers: { "Content-Type": "multipart/form-data" },
-                timeout: 120000,
-            })
-            .then(u);
-    },
+    // uploadBdPdf: (f) => {
+    //     const x = new FormData();
+    //     x.append("file", f);
+    //     return http
+    //         .post("/upload/bd-sanction/pdf-file", x, {
+    //             headers: { "Content-Type": "multipart/form-data" },
+    //             timeout: 120000,
+    //         })
+    //         .then(u);
+    // },
     createEntityCustomer: (b) =>
         http.post("/create/entity-customer", b).then(u),
     verifyEntity: (id) =>

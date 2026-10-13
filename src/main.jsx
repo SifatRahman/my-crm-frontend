@@ -12,7 +12,9 @@ const queryClient = new QueryClient({
             retry: 1,
             refetchOnWindowFocus: false,
         },
-        mutations: { retry: 0 },
+        mutations: {
+            retry: 0,
+        },
     },
 });
 ReactDOM.createRoot(document.getElementById("root")).render(

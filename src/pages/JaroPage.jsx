@@ -49,7 +49,7 @@ export default function JaroPage() {
       {m.data !== undefined && (
         <div className="score-card">
           <span>Similarity score</span>
-          <strong>{Number(m.data).toFixed(6)}</strong>
+          <strong>{Number(m.data).toFixed(2)}%</strong>
         </div>
       )}
     </>

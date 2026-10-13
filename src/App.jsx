@@ -4,9 +4,7 @@ import AppLayout from "./layouts/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import JaroPage from "./pages/JaroPage";
 import {
-    UnXmlPreviewPage,
-    ImportSanctionsPage,
-    BdPdfPreviewPage,
+    ImportSanctionsPage
 } from "./pages/UploadPages";
 import {
     CreateIndividualPage,
@@ -14,9 +12,11 @@ import {
     IndividualComparePage,
     EntityComparePage,
     VerifyIndividualPage,
-    VerifyEntityPage,IndividualHistoryPage,EntityHistoryPage
+    VerifyEntityPage,
+    IndividualHistoryPage,
+    EntityHistoryPage
 } from "./pages/CustomerPages";
-import ConfigPage from "./pages/ConfigPage";
+import SanctionConfiguration from "./components/SanctionConfiguration";
 const NotFound = () => (
     <div className="empty">
         <h2>Page not found</h2>
@@ -65,7 +65,7 @@ export default function App() {
                     path="/history/entity"
                     element={<EntityHistoryPage />}
                 />
-                <Route path="/configuration" element={<ConfigPage />} />
+                <Route path="/configuration" element={<SanctionConfiguration />} />
                 <Route path="*" element={<NotFound />} />
             </Route>
         </Routes>

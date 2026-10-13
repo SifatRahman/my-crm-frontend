@@ -94,8 +94,7 @@ export default function AppLayout() {
                     CRM API
                     <br />
                     <span>
-                        {import.meta.env.VITE_API_BASE_URL ||
-                            "http://192.168.169.55:8080/api"}
+                        @Janata Bank
                     </span>
                 </div>
             </aside>

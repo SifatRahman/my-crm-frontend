@@ -9,7 +9,7 @@ import {
     Activity,
 } from "lucide-react";
 import PageHeader from "../components/PageHeader";
-const cards = [
+const cardsOld = [
     [
         "CRM001",
         "Jaro-Winkler Test",
@@ -53,6 +53,7 @@ const cards = [
         Search,
     ],
 ];
+const cards=[];
 export default function Dashboard() {
     return (
         <>
@@ -63,7 +64,7 @@ export default function Dashboard() {
             />
             <div className="stat-grid">
                 <div className="stat">
-                    <span>12</span>
+                    <span>14</span>
                     <small>CRM endpoints mapped</small>
                 </div>
                 <div className="stat">

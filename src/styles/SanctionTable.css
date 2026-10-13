@@ -1,0 +1,73 @@
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.sanction-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 14px;
+}
+
+.sanction-table th,
+.sanction-table td {
+    border: 1px solid #ddd;
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+
+    /* Handle long text */
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.sanction-table th {
+    background-color: #8ad1fd;
+    font-weight: 600;
+    color: #333;
+}
+
+.sanction-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.sanction-table tbody tr:hover {
+    background-color: #f0f7ff;
+}
+
+/* Column widths */
+.sanction-table th:nth-child(1),
+.sanction-table td:nth-child(1) {
+    width: 5%;
+    text-align: center;
+}
+
+.sanction-table th:nth-child(2),
+.sanction-table td:nth-child(2) {
+    width: 25%;
+}
+
+.sanction-table th:nth-child(3),
+.sanction-table td:nth-child(3) {
+    width: 35%;
+}
+
+.sanction-table th:nth-child(4),
+.sanction-table td:nth-child(4) {
+    width: 18%;
+}
+
+.sanction-table th:nth-child(5),
+.sanction-table td:nth-child(5) {
+    width: 17%;
+}
+
+.empty-message {
+    padding: 20px;
+    text-align: center;
+    color: #666;
+}

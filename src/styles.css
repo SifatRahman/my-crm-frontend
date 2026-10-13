@@ -395,28 +395,54 @@ button, input, textarea {
 }
 .toast {
     position: fixed;
-    right: 22px;
-    bottom: 22px;
-    z-index: 50;
-    max-width: 440px;
-    padding: 12px 14px;
-    border-radius: 9px;
+    top: 20px;
+    right: 20px;
+    z-index: 9999;
+
     display: flex;
-    gap: 15px;
-    align-items: center;
-    box-shadow: 0 12px 40px #0002;
-    font-size: 13px;
+    align-items: flex-start;
+    gap: 12px;
+
+    max-width: 400px;
+    width: calc(100% - 40px);
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     background: #fff0ef;
     color: #8b2921;
     border: 1px solid #f1c7c3;
 }
-.toast button {
-    border: 0;
-    background: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: inherit;
+
+.toast span {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: normal;
 }
+
+.toast button {
+    flex-shrink: 0;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+    .toast {
+        top: 12px;
+        right: 12px;
+        width: calc(100% - 24px);
+        max-width: none;
+    }
+}
+
 .empty {
     padding: 50px;
     background: #fff;

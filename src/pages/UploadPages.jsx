@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import PageHeader from "../components/PageHeader";
 import FilePicker from "../components/FilePicker";
 import ResultPanel from "../components/ResultPanel";
+import BDSanctionDataPreview from "../components/BDSanctionDataPreview.jsx";
 import Spinner from "../components/Spinner";
 import Toast from "../components/Toast";
 import { crmApi } from "../api/crmApi";
@@ -22,6 +23,7 @@ function SingleUpload({
         mutationFn: () => action(file),
         onError: (e) => setError(getApiError(e)),
     });
+    //let ResponsePage = <h1>hell1<h1/>;
     return (
         <>
             <PageHeader code={code} title={title} description={description} />
@@ -45,7 +47,20 @@ function SingleUpload({
                     )}
                 </button>
             </div>
-            <ResultPanel data={m.data} title="Parsed response" />
+
+            {m.isSuccess && (
+                code === "CRM009" ? (
+                    <BDSanctionDataPreview
+                        data={m.data}
+                        title="Parsed response"
+                    />
+                ) : (
+                    <ResultPanel
+                        data={m.data}
+                        title="Parsed response"
+                    />
+                )
+            )}
         </>
     );
 }

@@ -97,7 +97,7 @@ export default function AppLayout() {
                     <br />
                     <span>
                         {import.meta.env.VITE_API_BASE_URL ||
-                            "http://127.0.0.1:8080/api"}
+                            "http://192.168.169.55:8080/api"}
                     </span>
                 </div>
             </aside>

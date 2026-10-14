@@ -153,44 +153,6 @@ const compareEntityExample = {
   },
 };
 
-//Creation customer
-// function JsonMutationPage({
-//   code,
-//   title,
-//   description,
-//   initialValue,
-//   action,
-//   successLabel,
-// }) {
-//   const [body, setBody] = useState(initialValue),
-//     [error, setError] = useState("");
-//   const m = useMutation({
-//     mutationFn: () => action(body),
-//     onError: (e) => setError(getApiError(e)),
-//   });
-//   return (
-//     <>
-//       <PageHeader code={code} title={title} description={description} />
-//       <Toast message={error} type="error" />
-//       <div className="panel">
-//         <JsonEditor
-//           value={body}
-//           onChange={setBody}
-//           hint="Starter fields only: replace them with the exact fields from your backend DTO."
-//         />
-//         <button
-//           className="btn primary"
-//           disabled={m.isPending}
-//           onClick={() => m.mutate()}
-//         >
-//           {m.isPending ? <Spinner label="Submitting..." /> : successLabel}
-//         </button>
-//       </div>
-//       <Toast message={m?.data?.message} type="success" />
-//       <ResultPanel data={m.data}/>
-//     </>
-//   );
-// }
 export const CreateIndividualPage = () => (
   <MutationFormPage
     code="CRM004"
@@ -211,9 +173,6 @@ export const CreateEntityPage = () => (
     successLabel="Create entity"
   />
 );
-
-
-
 
 
 
@@ -294,6 +253,7 @@ const q = useMutation({
             : crmApi.verifyIndividual(id),
 });
 
+
 const run = () => {
     if (!id.trim()) {
         setError("Customer ID is required");
@@ -329,7 +289,8 @@ const run = () => {
           {q.isFetching ? <Spinner label="Verifying..." /> : "Verify AML"}
         </button>
       </div>
-      <ResultPanel data={q.data} title="Verification result" />
+      <Toast message={q?.data?.message} type="success" />
+      {entity ? <SanctionEntityComparisonTable data={q?.data?.data}/>:<SanctionIndividualComparisonTable data={q?.data?.data}/>}
     </>
   );
 }
@@ -377,6 +338,7 @@ function HistoryPage({ entity = false }) {
           {q.isFetching ? <Spinner label="Fetching history..." /> : "Get History"}
         </button>
       </div>
+      
       
       {entity ? <SanctionIndividualHistoryTable data={q.data}/> : <SanctionIndividualHistoryTable data={q.data}/>}
     </>

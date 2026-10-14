@@ -8,148 +8,107 @@ import Spinner from "./Spinner";
 import Toast from "./Toast";
 import { getApiError } from "../api/http";
 
+function formatLabel(key) {
+    return key
+        .replace(/_/g, " ")
+        .replace(/\b\w/g, (char) => char.toUpperCase());
+}
 
+function FormFields({ data, onChange, prefix = "" }) {
+    return Object.entries(data).map(([key, value]) => {
+        const path = prefix ? `${prefix}.${key}` : key;
 
-const individualExample = {
-  full_name: "Sifatur Rahman Sifat",
-  full_name_2: "Sifat",
-  family_name: "Sifat",
-  short_name: "Sifat",
-  mnemonic: "sifat",
-  gender: "Male",
-  account_officer: 0,
-  sector: 0,
-  target: 0,
-  customer_status: 0,
-  industry: "IT",
-  language: 2,
-  residence: "BD",
-  date_of_birth: "1998-11-14",
-  nationality: "Bangladeshi",
-  nid_no: "6904059851",
-  passport_no: "EE947317",
-  father_name: "Karim",
-  mother_name: "String",
-  marital_status: "Unmarried",
-  spouse: null,
-  cb_sector_code: null,
-  return_submission_date: "2026-09-28",
-  sms_alert_service: true,
-  individual_customer_permanent_address: {
-    country: "Bangladesh",
-    division_or_state: "Khulna",
-    district: "Khulna",
-    upazila: "Phultala",
-    police_station: "Khan jahan ali",
-    post_code: "9205",
-    village_or_area: "Gilatala",
-    road_or_block: "50 road,gilata",
-    house_or_flat_no: ["50 No", "2A"],
-    mobile_no: "01986800766",
-    phone_number_off_1: "01986800766",
-    email_address: "shifaturrahman390@gmail.com",
-  },
-};
-const entityExample = {
-  full_name: "AL-BASHAIR TRADING COMPANY, LTD",
-  account_officer: 0,
-  sector: 0,
-  target: 0,
-  customer_status: 0,
-  industry: "string",
-  language: 0,
-  residence: "string",
-  cb_sector_code: "string",
-  return_submission_date: "2026-10-02",
-  sms_alert_service: true,
-  entityCustomerPermanentAddressDTO: {
-    country: "",
-    division_or_state: "string",
-    district: "string",
-    upazila: "string",
-    police_station: "string",
-    post_code: "string",
-    village_or_area: "string",
-    road_or_block: "string",
-    house_or_flat_no: ["string"],
-    mobile_no: "string",
-    phone_number_off_1: "string",
-    email_address: "string",
-  },
-};
-const compareIndividualExample = {
-  basic_details: {
-    full_name: "RUBEN JR",
-    full_name_2: "",
-    family_name: "",
-    short_name: "",
-    mnemonic: "",
-    gender: "",
-    account_officer: 0,
-    sector: 0,
-    target: 0,
-    customer_status: 0,
-    industry: "",
-    language: 0,
-    residence: "",
-    date_of_birth: "1972-10-04",
-    nationality: "bd",
-    nid_no: "",
-    passport_no: "EE947317",
-    father_name: "",
-    mother_name: "",
-    marital_status: "",
-    spouse: "",
-    cb_sector_code: "",
-    return_submission_date: "2026-09-28",
-    sms_alert_service: true,
-  },
-  permanent_address: {
-    country: "Philippines",
-    division_or_state: "Sulu region",
-    district: "Philippines",
-    upazila: "",
-    police_station: "",
-    post_code: "",
-    village_or_area: "",
-    road_or_block: "",
-    house_or_flat_no: [""],
-    mobile_no: "",
-    phone_number_off_1: "",
-    email_address: "",
-  },
-};
-const compareEntityExample = {
-  basic_details: {
-    full_name: "Shahadat Islam",
-    account_officer: 0,
-    sector: 0,
-    target: 0,
-    customer_status: 0,
-    industry: "string",
-    language: 0,
-    residence: "string",
-    cb_sector_code: "string",
-    return_submission_date: "2026-10-02",
-    sms_alert_service: true,
-  },
-  permanent_address: {
-    country: "Dhaka.",
-    division_or_state: "",
-    district: null,
-    upazila: null,
-    police_station: null,
-    post_code: null,
-    village_or_area: null,
-    road_or_block: "",
-    house_or_flat_no: [""],
-    mobile_no: "",
-    phone_number_off_1: "",
-    email_address: "",
-  },
-};
+        // Nested DTO object: recursively render its fields.
+        if (
+            value !== null &&
+            typeof value === "object" &&
+            !Array.isArray(value)
+        ) {
+            return (
+                <fieldset className="nested-form-section" key={path}>
+                    <legend>{formatLabel(key)}</legend>
 
-export default function MutationFormPage({
+                    <div className="form-grid">
+                        <FormFields
+                            data={value}
+                            prefix={path}
+                            onChange={onChange}
+                        />
+                    </div>
+                </fieldset>
+            );
+        }
+
+        const isBoolean = typeof value === "boolean";
+        const isNumber = typeof value === "number";
+
+        return (
+            <div className="form-field" key={path}>
+                {isBoolean ? (
+                    <label className="checkbox-field">
+                        <input
+                            type="checkbox"
+                            checked={value}
+                            onChange={(event) =>
+                                onChange(path, event.target.checked)
+                            }
+                        />
+
+                        <span>{formatLabel(key)}</span>
+                    </label>
+                ) : (
+                    <>
+                        <label htmlFor={path}>
+                            {formatLabel(key)}
+                        </label>
+
+                        <input
+                            id={path}
+                            name={path}
+                            type={isNumber ? "number" : "text"}
+                            value={value ?? ""}
+                            step={isNumber ? "any" : undefined}
+                            className="form-input"
+                            onChange={(event) => {
+                                const inputValue = event.target.value;
+
+                                onChange(
+                                    path,
+                                    isNumber && inputValue !== ""
+                                        ? Number(inputValue)
+                                        : inputValue
+                                );
+                            }}
+                        />
+                    </>
+                )}
+            </div>
+        );
+    });
+}
+
+function updateNestedValue(object, path, value) {
+    const keys = path.split(".");
+
+    const result = { ...object };
+    let current = result;
+    let original = object;
+
+    for (let i = 0; i < keys.length - 1; i++) {
+        const key = keys[i];
+
+        current[key] = { ...original[key] };
+
+        current = current[key];
+        original = original[key];
+    }
+
+    current[keys[keys.length - 1]] = value;
+
+    return result;
+}
+
+export default function FormMutationPage({
     code,
     title,
     description,
@@ -157,7 +116,10 @@ export default function MutationFormPage({
     action,
     successLabel,
 }) {
-    const [formData, setFormData] = useState(initialValue);
+    const [formData, setFormData] = useState(() =>
+        structuredClone(initialValue)
+    );
+
     const [error, setError] = useState("");
 
     const mutation = useMutation({
@@ -172,20 +134,10 @@ export default function MutationFormPage({
         },
     });
 
-    function handleChange(event) {
-        const { name, value, type, checked } = event.target;
-
-        setFormData((previous) => ({
-            ...previous,
-            [name]:
-                type === "checkbox"
-                    ? checked
-                    : type === "number"
-                      ? value === ""
-                          ? ""
-                          : Number(value)
-                      : value,
-        }));
+    function handleChange(path, value) {
+        setFormData((previous) =>
+            updateNestedValue(previous, path, value)
+        );
     }
 
     function handleSubmit(event) {
@@ -193,6 +145,23 @@ export default function MutationFormPage({
         setError("");
         mutation.mutate();
     }
+
+    // Separate primitive fields from nested DTO objects.
+    const basicFields = Object.fromEntries(
+        Object.entries(formData).filter(
+            ([, value]) =>
+                value === null ||
+                typeof value !== "object" ||
+                Array.isArray(value)
+        )
+    );
+
+    const nestedObjects = Object.entries(formData).filter(
+        ([, value]) =>
+            value !== null &&
+            typeof value === "object" &&
+            !Array.isArray(value)
+    );
 
     return (
         <>
@@ -205,68 +174,33 @@ export default function MutationFormPage({
             <Toast message={error} type="error" />
 
             <div className="panel">
-                <form
-                    className="customer-form"
-                    onSubmit={handleSubmit}
-                >
-                    <div className="form-grid">
-                        {Object.entries(formData).map(([key, value]) => {
-                            const isBoolean =
-                                typeof value === "boolean";
+                <form onSubmit={handleSubmit} className="customer-form">
+                    <section className="form-section">
+                        <h3>Basic Information</h3>
 
-                            const isNumber =
-                                typeof value === "number";
+                        <div className="form-grid">
+                            <FormFields
+                                data={basicFields}
+                                onChange={handleChange}
+                            />
+                        </div>
+                    </section>
 
-                            const label = key
-                                .replace(/_/g, " ")
-                                .replace(/\b\w/g, (char) =>
-                                    char.toUpperCase()
-                                );
+                    {nestedObjects.map(([key, value]) => (
+                        <section
+                            className="form-section"
+                            key={key}
+                        >
+                            <h3>{formatLabel(key)}</h3>
 
-                            return (
-                                <div
-                                    className="form-field"
-                                    key={key}
-                                >
-                                    {isBoolean ? (
-                                        <label className="checkbox-field">
-                                            <input
-                                                type="checkbox"
-                                                name={key}
-                                                checked={value}
-                                                onChange={handleChange}
-                                            />
-                                            <span>{label}</span>
-                                        </label>
-                                    ) : (
-                                        <>
-                                            <label htmlFor={key}>
-                                                {label}
-                                            </label>
-
-                                            <input
-                                                id={key}
-                                                name={key}
-                                                type={
-                                                    isNumber
-                                                        ? "number"
-                                                        : "text"
-                                                }
-                                                value={value ?? ""}
-                                                onChange={handleChange}
-                                                step={
-                                                    isNumber
-                                                        ? "any"
-                                                        : undefined
-                                                }
-                                                className="form-input"
-                                            />
-                                        </>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
+                            <div className="form-grid">
+                                <FormFields
+                                    data={{ [key]: value }}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                        </section>
+                    ))}
 
                     <div className="form-actions">
                         <button

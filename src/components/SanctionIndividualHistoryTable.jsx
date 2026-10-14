@@ -58,10 +58,11 @@ export default function SanctionIndividualComparisonTable({
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Customer Name</th>
                             <th>Sanctioned Person</th>
-                            <th>Individual ID</th>
                             <th>Overall Score</th>
                             <th>Match Status</th>
+                            <th>Timestamp</th>
                             <th>Score Details</th>
                         </tr>
                     </thead>
@@ -72,15 +73,15 @@ export default function SanctionIndividualComparisonTable({
                                 <td>{index + 1}</td>
 
                                 <td>
-                                    {/* <strong className="person-name">
-                                        {person.individual_customer_id?.trim()}
-                                    </strong> */}
+                                    <strong className="person-name">
+                                        {person.individual_customer_name?.trim()}
+                                    </strong>
                                 </td>
 
                                 <td>
-                                    {/* <span className="person-id">
+                                    <span className="person-id">
                                         {person.top_match_sanctioned_person_name}
-                                    </span> */}
+                                    </span>
                                 </td>
 
                                 <td>
@@ -117,6 +118,11 @@ export default function SanctionIndividualComparisonTable({
                                     >
                                         {person.match_status
                                             ?.replaceAll("_", " ")}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span className="person-id">
+                                        {person.timestamp}
                                     </span>
                                 </td>
 

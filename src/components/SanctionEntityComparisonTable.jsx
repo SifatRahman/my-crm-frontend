@@ -2,6 +2,7 @@
 import React from "react";
 import "../styles/SanctionEntityComparisonTable.css";
 
+
 function formatScore(score) {
     return `${(Number(score ?? 0) * 100).toFixed(0)}%`;
 }

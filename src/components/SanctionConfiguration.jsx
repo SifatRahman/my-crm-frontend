@@ -186,7 +186,7 @@ export default function SanctionConfiguration() {
     };
 
     return (
-        <div className="sc-page">
+        <div className="mutation-form-page">
             <header className="sc-header">
                 <div>
                     <span className="sc-eyebrow">
@@ -222,13 +222,6 @@ export default function SanctionConfiguration() {
                                         <span className="sc-label">
                                             {field.label}
                                         </span>
-
-                                        {field.description && (
-                                            <span className="sc-description">
-                                                {field.description}
-                                            </span>
-                                        )}
-
                                         <div className="sc-input-wrap">
                                             <input
                                                 type="number"
@@ -250,9 +243,6 @@ export default function SanctionConfiguration() {
                                             </span>
                                         </div>
 
-                                        <span className="sc-raw-key">
-                                            {field.key}
-                                        </span>
                                     </label>
                                 ))}
                             </div>

@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import PageHeader from "../components/PageHeader";
 import JsonEditor from "../components/JsonEditor";
-import ResultPanel from "../components/ResultPanel";
 import Spinner from "../components/Spinner";
 import Toast from "../components/Toast";
 import { crmApi } from "../api/crmApi";
@@ -201,7 +200,7 @@ function CustomerComparisonPage({
     <>
       <PageHeader code={code} title={title} description={description} />
       <Toast message={error} type="error" />
-      <div className="panel">
+      <div className="mutation-form-page">
         <JsonEditor
           value={body}
           onChange={setBody}
@@ -276,7 +275,7 @@ const run = () => {
         message={error || (q.error && getApiError(q.error))}
         type="error"
       />
-      <div className="panel">
+      <div className="mutation-form-page">
         <div className="field">
           <label>{entity ? "Entity" : "Individual"} customer ID</label>
           <input
@@ -325,7 +324,7 @@ function HistoryPage({ entity = false }) {
         message={error || (q.error && getApiError(q.error))}
         type="error"
       />
-      <div className="panel">
+      <div className="mutation-form-page">
         <div className="field">
           <label>{entity ? "Entity" : "Individual"} customer ID</label>
           <input

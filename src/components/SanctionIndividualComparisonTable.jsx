@@ -1,6 +1,8 @@
 import React from "react";
 import "../styles/SanctionIndividualComparisonTable.css";
 
+
+
 const scoreFields = [
     { key: "name_score", label: "Name" },
     { key: "dob_score", label: "DOB" },

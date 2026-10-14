@@ -90,7 +90,7 @@ export function ImportSanctionsPage() {
         description="Upload both sources and persist the parsed sanction datasets."
       />
       <Toast message={error} type="error" />
-      <div className="panel">
+      <div className="mutation-form-page">
         <div className="form-grid two">
           <FilePicker
             label="UN sanctions XML"

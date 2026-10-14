@@ -121,7 +121,7 @@ export default function SanctionIndividualComparisonTable({
                                 </td>
                                 <td>
                                     <span className="person-id">
-                                        {person.timestamp}
+                                        {new Date(person.timestamp).toLocaleString()}
                                     </span>
                                 </td>
 

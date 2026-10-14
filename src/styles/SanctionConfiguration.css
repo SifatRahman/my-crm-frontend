@@ -9,6 +9,19 @@
     font-family: Inter, system-ui, sans-serif;
 }
 
+.mutation-form-page {
+
+  width: min(100%, 1080px);
+  margin: 18px auto;
+  padding: clamp(16px, 2.2vw, 26px);
+  color: #182522;
+  background: #ffffff;
+  border: 1px solid #e4ebe7;
+  border-radius: 14px;
+  box-shadow: 0 5px 22px rgba(34, 146, 101, 0.05);
+  box-sizing: border-box;
+}
+
 .sc-header,
 .sc-saved-heading {
     display: flex;

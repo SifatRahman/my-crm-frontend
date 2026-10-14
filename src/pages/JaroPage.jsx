@@ -23,7 +23,7 @@ export default function JaroPage() {
         description="Test the backend similarity implementation."
       />{" "}
       <Toast message={error} type="error" />
-      <div className="panel">
+      <div className="mutation-form-page">
         <div className="form-grid two">
           <div className="field">
             <label>String 1</label>

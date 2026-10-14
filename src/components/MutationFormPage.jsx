@@ -10,6 +10,7 @@ import { getApiError } from "../api/http";
 import "../styles/MutationFormPage.css";
 import SanctionIndividualComparisonTable from "./SanctionIndividualComparisonTable";
 import SanctionEntityComparisonTable from "./SanctionEntityComparisonTable";
+import CustomerCreatedResult from "./CustomerCreatedResult";
 
 
 export default function MutationFormPage({
@@ -335,7 +336,7 @@ export default function MutationFormPage({
                     data={mutation.data}
                 />
             ) : (
-                <ResultPanel data={mutation.data} />
+                <CustomerCreatedResult data={mutation?.data} />
             )}
         </>
     );

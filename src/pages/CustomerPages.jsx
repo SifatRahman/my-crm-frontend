@@ -222,7 +222,7 @@ function CustomerComparisonPage({
 }
 
 export const IndividualComparePage = () => (
-  <CustomerComparisonPage
+  <MutationFormPage
     code="CRM006"
     title="Individual sanction screening"
     description="Pass customer data and retrieve the backend match scores."
@@ -232,7 +232,7 @@ export const IndividualComparePage = () => (
   />
 );
 export const EntityComparePage = () => (
-  <CustomerComparisonPage
+  <MutationFormPage
     code="CRM012"
     title="Entity sanction screening"
     description="Pass entity data and retrieve the backend match scores."

@@ -1,171 +1,324 @@
+
+
 .mutation-form-page {
-  background: linear-gradient(180deg, #ffffff 0%, #f8faff 100%);
-  border: 1px solid #dfe7f8;
+  --form-primary: #048636;
+  --form-primary-hover: #105440;
+  --form-text: #182522;
+  --form-muted: #64736e;
+  --form-border: #dce5e1;
+  --form-border-focus: #6eaa98;
+  --form-surface: #ffffff;
+  --form-soft: #f5f8f6;
+  --form-danger: #b42318;
+
+  width: min(100%, 1080px);
+  margin: 18px auto;
+  padding: clamp(16px, 2.2vw, 26px);
+  color: var(--form-text);
+  background: var(--form-surface);
+  border: 1px solid #e4ebe7;
   border-radius: 14px;
-  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.04);
-  padding: 22px 18px 14px;
+  box-shadow: 0 5px 22px rgba(34, 146, 101, 0.05);
+  box-sizing: border-box;
 }
 
-.mutation-form {
-  display: grid;
-  gap: 20px;
+.mutation-form-page *,
+.mutation-form-page *::before,
+.mutation-form-page *::after {
+  box-sizing: border-box;
 }
 
-.mutation-form .form-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid #edf2fb;
-}
-
-.mutation-form .form-kicker {
-  margin: 0 0 6px;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #4d7ae8;
-  font-weight: 800;
-}
-
-.mutation-form .form-title {
+.mutation-form-page .mutation-form {
+  width: 100%;
   margin: 0;
-  font-size: 22px;
-  letter-spacing: -0.03em;
-  color: #152033;
 }
 
-.mutation-form .form-badge {
+.mutation-form-page .form-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #218654;
+}
+
+.mutation-form-page .form-kicker {
+  margin: 0 0 4px;
+  color: var(--form-primary);
+  font-size: 0.7rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.mutation-form-page .form-title {
+  margin: 0;
+  color: var(--form-text);
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.mutation-form-page .form-badge {
+  flex: 0 0 auto;
   display: inline-flex;
   align-items: center;
-  padding: 7px 12px;
+  gap: 6px;
+  padding: 5px 10px;
+  color: #27634f;
+  background: #edf7f1;
+  border: 1px solid #d6ebdf;
   border-radius: 999px;
-  background: #eaf5ec;
-  color: #227a4d;
-  font-size: 11px;
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-weight: 650;
 }
 
-.mutation-form .form-grid {
+.mutation-form-page .form-grid,
+.mutation-form-page .nested-form-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  gap: 14px 18px;
+  align-items: start;
 }
 
-.mutation-form .form-field {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: #fff;
-  border: 1px solid #dfe8f8;
-  border-radius: 12px;
-  padding: 14px 16px 16px;
-  min-height: 92px;
+.mutation-form-page .form-field {
+  min-width: 0;
+  margin: 0;
 }
 
-.mutation-form .form-field-group {
-  grid-column: 1 / -1;
-  background: #fff;
-  border-color: #dfe8f8;
-  gap: 14px;
-  padding: 16px;
-}
-
-.mutation-form .form-group-label {
-  font-size: 15px;
-  font-weight: 700;
-  color: #1a2a3d;
-  margin-bottom: 2px;
-}
-
-.mutation-form .nested-form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.mutation-form .form-field label {
-  font-size: 12px;
-  font-weight: 700;
-  color: #1f2e45;
+.mutation-form-page .form-field > label,
+.mutation-form-page .form-field > label:not(.checkbox-field) {
   display: block;
-  margin-left: 2px;
+  margin: 0 0 5px;
+  color: #354640;
+  font-size: 0.8rem;
+  font-weight: 650;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
-.mutation-form .form-field label[for*="full_name"]::after,
-.mutation-form .form-field label[for*="customer_status"]::after,
-.mutation-form .form-field label[for*="nationality"]::after,
-.mutation-form .form-field label[for*="nid_no"]::after,
-.mutation-form .form-field label[for*="date_of_birth"]::after {
-  content: " *";
-  color: #d64545;
-  font-weight: 700;
-}
-
-.mutation-form .form-input,
-.mutation-form .form-textarea {
+.mutation-form-page .form-input,
+.mutation-form-page .form-field input:not([type="checkbox"]),
+.mutation-form-page .form-field select,
+.mutation-form-page .form-field textarea {
+  display: block;
   width: 100%;
-  border: 1px solid #d6dfef;
-  border-radius: 10px;
-  padding: 14px 12px;
-  outline: none;
+  min-width: 0;
+  height: 37px;
+  margin: 0;
+  padding: 8px 10px;
+  color: var(--form-text);
   background: #fff;
-  color: #172033;
-  font-size: 14px;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid var(--form-border);
+  border-radius: 7px;
+  outline: none;
+  font: inherit;
+  font-size: 0.84rem;
+  line-height: 1.35;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background 140ms ease;
 }
 
-.mutation-form .form-input:focus,
-.mutation-form .form-textarea:focus {
-  border-color: #6c91dc;
-  box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.08);
+.mutation-form-page .form-field textarea {
+  min-height: 76px;
+  height: auto;
+  resize: vertical;
 }
 
-.mutation-form .checkbox-field {
-  display: flex !important;
-  align-items: center;
-  gap: 10px;
-  flex-direction: row !important;
-  height: 100%;
-  padding: 4px 2px;
+.mutation-form-page .form-field input::placeholder,
+.mutation-form-page .form-field textarea::placeholder {
+  color: #9aa7a1;
+  opacity: 1;
 }
 
-.mutation-form .checkbox-field input {
-  width: 18px;
-  height: 18px;
-  accent-color: #2f6fed;
+.mutation-form-page .form-field input:hover,
+.mutation-form-page .form-field select:hover,
+.mutation-form-page .form-field textarea:hover {
+  border-color: #b8cbc2;
 }
 
-.mutation-form .form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 8px;
+.mutation-form-page .form-field input:focus,
+.mutation-form-page .form-field select:focus,
+.mutation-form-page .form-field textarea:focus {
+  border-color: var(--form-border-focus);
+  box-shadow: 0 0 0 3px rgb(23 107 85 / 10%);
 }
 
-.mutation-form .btn {
-  padding: 10px 18px;
+.mutation-form-page .form-field input:disabled,
+.mutation-form-page .form-field select:disabled,
+.mutation-form-page .form-field textarea:disabled {
+  color: #829089;
+  background: #f2f5f3;
+  cursor: not-allowed;
+}
+
+.mutation-form-page .form-field-group {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin-top: 4px;
+  padding: 15px;
+  background: var(--form-soft);
+  border: 1px solid #e1eae5;
   border-radius: 10px;
+}
+
+.mutation-form-page .form-group-label {
+  margin: 0 0 13px;
+  padding-bottom: 9px;
+  color: #214f40;
+  border-bottom: 1px solid #dce7e1;
+  font-size: 0.88rem;
+  font-weight: 750;
+  line-height: 1.4;
+}
+
+.mutation-form-page .nested-form-grid {
+  gap: 13px 16px;
+}
+
+.mutation-form-page .checkbox-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 37px;
+  color: #354640;
+  font-size: 0.82rem;
+  font-weight: 600;
   cursor: pointer;
+}
+
+.mutation-form-page .checkbox-field input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--form-primary);
+  cursor: pointer;
+}
+
+.mutation-form-page .form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 22px;
+  padding-top: 15px;
+  border-top: 1px solid #e8eeeb;
+}
+
+.mutation-form-page .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 15px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font: inherit;
+  font-size: 0.82rem;
   font-weight: 700;
-  font-size: 14px;
-  transition: opacity 0.2s ease;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease, transform 140ms ease;
 }
 
-.mutation-form .btn.secondary {
-  background: #eef2ff;
-  color: #2f6fed;
-  border: 1px solid #d8e4ff;
+.mutation-form-page .btn:focus-visible {
+  outline: 3px solid rgb(23 107 85 / 22%);
+  outline-offset: 2px;
 }
 
-.mutation-form .btn.primary {
-  background: #2f6fed;
+.mutation-form-page .btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.mutation-form-page .btn.primary {
   color: #fff;
-  border: 1px solid #2f6fed;
+  background: var(--form-primary);
+  border-color: var(--form-primary);
 }
 
-.mutation-form .btn:hover {
-  opacity: 0.96;
+.mutation-form-page .btn.primary:hover:not(:disabled) {
+  background: var(--form-primary-hover);
+  border-color: var(--form-primary-hover);
+  box-shadow: 0 3px 9px rgb(23 107 85 / 16%);
+}
+
+.mutation-form-page .btn.secondary {
+  color: #42534c;
+  background: #fff;
+  border-color: #d4dfd9;
+}
+
+.mutation-form-page .btn.secondary:hover:not(:disabled) {
+  background: #f4f7f5;
+  border-color: #b9cbc1;
+}
+
+.mutation-form-page .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.mutation-form-page .form-error,
+.mutation-form-page [role="alert"] {
+  color: var(--form-danger);
+}
+
+/* Long API field names should wrap instead of stretching the layout. */
+.mutation-form-page .form-field,
+.mutation-form-page .form-group-label {
+  overflow-wrap: anywhere;
+}
+
+/* Medium screens: preserve compact fields while reducing gaps. */
+@media (max-width: 760px) {
+  .mutation-form-page {
+    margin: 12px auto;
+    padding: 16px;
+    border-radius: 11px;
+  }
+
+  .mutation-form-page .form-grid,
+  .mutation-form-page .nested-form-grid {
+    gap: 12px;
+  }
+
+  .mutation-form-page .form-field-group {
+    padding: 12px;
+  }
+}
+
+/* Small screens: one field per row and full-width actions. */
+@media (max-width: 520px) {
+  .mutation-form-page .form-grid,
+  .mutation-form-page .nested-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .mutation-form-page .form-topbar {
+    align-items: flex-start;
+  }
+
+  .mutation-form-page .form-field-group {
+    grid-column: 1 / -1;
+  }
+
+  .mutation-form-page .form-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mutation-form-page .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mutation-form-page *,
+  .mutation-form-page *::before,
+  .mutation-form-page *::after {
+    transition: none !important;
+  }
 }

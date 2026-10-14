@@ -87,8 +87,7 @@ export default function SanctionIndividualComparisonTable({
                                 <td>
                                     <div className="overall-score">
                                         <strong>
-                                            {person.total_score
-                                                ?? formatScore(person.total_score)}
+                                            {formatScore(person.total_score) ?? person.total_score}
                                         </strong>
 
                                         <div className="score-track">

@@ -8,9 +8,11 @@ import Spinner from "./Spinner";
 import Toast from "./Toast";
 import { getApiError } from "../api/http";
 import "../styles/MutationFormPage.css";
+import SanctionIndividualComparisonTable from "./SanctionIndividualComparisonTable";
+import SanctionEntityComparisonTable from "./SanctionEntityComparisonTable";
 
 
-export default function FormMutationPage({
+export default function MutationFormPage({
     code,
     title,
     description,
@@ -30,6 +32,8 @@ export default function FormMutationPage({
     }, [initialValue]);
 
     const mutation = useMutation({
+
+
         mutationFn: () => action(formData),
 
         onSuccess: () => {
@@ -116,15 +120,13 @@ export default function FormMutationPage({
                 type === "checkbox"
                     ? checked
                     : type === "number"
-                      ? value === ""
-                          ? ""
-                          : Number(value)
-                      : value;
+                        ? value === ""
+                            ? ""
+                            : Number(value)
+                        : value;
 
             const nextValue =
-                fieldName === "house_or_flat_no"
-                    ? nextValueRaw === "" ? null : String(nextValueRaw)
-                    : nextValueRaw;
+                fieldName === "house_or_flat_no" ? nextValueRaw.split(",").map((item) => item.trim()) : nextValueRaw === "" ? null : String(nextValueRaw);
 
             return setNestedValue(previous, path, nextValue);
         });
@@ -324,8 +326,17 @@ export default function FormMutationPage({
                 message={mutation.data?.message}
                 type="success"
             />
-
-            <ResultPanel data={mutation.data} />
+            {code === "CRM006" ? (
+                <SanctionIndividualComparisonTable
+                    data={mutation.data}
+                />
+            ) : code === "CRM012" ? (
+                <SanctionEntityComparisonTable
+                    data={mutation.data}
+                />
+            ) : (
+                <ResultPanel data={mutation.data} />
+            )}
         </>
     );
 }

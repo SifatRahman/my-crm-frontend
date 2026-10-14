@@ -11,6 +11,7 @@ import { getApiError } from "../api/http";
 import SanctionIndividualComparisonTable from "../components/SanctionIndividualComparisonTable";
 import SanctionEntityComparisonTable from "../components/SanctionEntityComparisonTable";
 import SanctionIndividualHistoryTable from "../components/SanctionIndividualHistoryTable";
+import MutationFormPage from "../components/MutationFormPage";
 
 
 const individualExample = {
@@ -153,45 +154,45 @@ const compareEntityExample = {
 };
 
 //Creation customer
-function JsonMutationPage({
-  code,
-  title,
-  description,
-  initialValue,
-  action,
-  successLabel,
-}) {
-  const [body, setBody] = useState(initialValue),
-    [error, setError] = useState("");
-  const m = useMutation({
-    mutationFn: () => action(body),
-    onError: (e) => setError(getApiError(e)),
-  });
-  return (
-    <>
-      <PageHeader code={code} title={title} description={description} />
-      <Toast message={error} type="error" />
-      <div className="panel">
-        <JsonEditor
-          value={body}
-          onChange={setBody}
-          hint="Starter fields only: replace them with the exact fields from your backend DTO."
-        />
-        <button
-          className="btn primary"
-          disabled={m.isPending}
-          onClick={() => m.mutate()}
-        >
-          {m.isPending ? <Spinner label="Submitting..." /> : successLabel}
-        </button>
-      </div>
-      <Toast message={m?.data?.message} type="success" />
-      <ResultPanel data={m.data}/>
-    </>
-  );
-}
+// function JsonMutationPage({
+//   code,
+//   title,
+//   description,
+//   initialValue,
+//   action,
+//   successLabel,
+// }) {
+//   const [body, setBody] = useState(initialValue),
+//     [error, setError] = useState("");
+//   const m = useMutation({
+//     mutationFn: () => action(body),
+//     onError: (e) => setError(getApiError(e)),
+//   });
+//   return (
+//     <>
+//       <PageHeader code={code} title={title} description={description} />
+//       <Toast message={error} type="error" />
+//       <div className="panel">
+//         <JsonEditor
+//           value={body}
+//           onChange={setBody}
+//           hint="Starter fields only: replace them with the exact fields from your backend DTO."
+//         />
+//         <button
+//           className="btn primary"
+//           disabled={m.isPending}
+//           onClick={() => m.mutate()}
+//         >
+//           {m.isPending ? <Spinner label="Submitting..." /> : successLabel}
+//         </button>
+//       </div>
+//       <Toast message={m?.data?.message} type="success" />
+//       <ResultPanel data={m.data}/>
+//     </>
+//   );
+// }
 export const CreateIndividualPage = () => (
-  <JsonMutationPage
+  <MutationFormPage
     code="CRM004"
     title="Create individual customer"
     description="Create and save an individual customer."
@@ -201,7 +202,7 @@ export const CreateIndividualPage = () => (
   />
 );
 export const CreateEntityPage = () => (
-  <JsonMutationPage
+  <MutationFormPage
     code="CRM010"
     title="Create entity customer"
     description="Create and save an entity customer."

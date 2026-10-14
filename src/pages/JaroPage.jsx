@@ -8,8 +8,8 @@ import Toast from "../components/Toast";
 import { crmApi } from "../api/crmApi";
 import { getApiError } from "../api/http";
 export default function JaroPage() {
-  const [a, setA] = useState("MARTHA"),
-    [b, setB] = useState("MARHTA"),
+  const [a, setA] = useState("Rahim"),
+    [b, setB] = useState("Md Rahim"),
     [error, setError] = useState("");
   const m = useMutation({
     mutationFn: () => crmApi.testJaro(a, b),

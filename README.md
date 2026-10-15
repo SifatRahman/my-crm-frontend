@@ -10,7 +10,7 @@ cp .env.example .env
 npm run dev
 ```
 
-Default API URL: `http://localhost:8080/api`
+Default API URL: `http://192.168.169.55:8080/api`
 
 ## Endpoint mapping
 
